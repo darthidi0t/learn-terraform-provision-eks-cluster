@@ -32,8 +32,6 @@ terraform -help
 
 # Steps to install AWSCLI
 
-
-
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
@@ -54,5 +52,31 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 3. Validate
 
 kubectl version --client
+
+# Set up and Initialize tf workspace
+ 
+1. Clone the repo
+
+https://github.com/darthidi0t/learn-terraform-provision-eks-cluster
+
+cd learn-terraform-provision-eks-cluster
+
+2. Initialize the workspace
+
+terraform init
+
+3. Start deployment
+
+terraform apply
+
+4. Configure Kubectl 
+
+aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
+
+Feel free to run sample apps or any apps on this EKS Cluster.
+
+5. To delete the deployment
+
+terraform destory
 
 
